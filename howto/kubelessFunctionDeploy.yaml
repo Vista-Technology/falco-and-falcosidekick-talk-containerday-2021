@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: falco-pod-isolation
+
+---
+
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: falco-pod-isolation-cluster-role
+rules:
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["*"]
+    verbs: ["*"]
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: falco-pod-delete-cluster-role-binding
+roleRef:
+  kind: ClusterRole
+  name: falco-pod-isolation-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: falco-pod-isolation
+    namespace: kubeless
+
+---
+
+apiVersion: kubeless.io/v1beta1
+kind: Function
+metadata:
+  finalizers:
+    - kubeless.io/function
+  generation: 1
+  labels:
+    created-by: kubeless
+    function: isolate-pod
+  name: isolate-pod
+spec:
+  deps: |
+    kubernetes>=12.0.1
+  function-content-type: text
+  function: |-
+    from kubernetes import client,config
+
+    config.load_incluster_config()
+
+    def isolate_pod(event, context):
+        rule = event['data']['rule'] or None
+        output_fields = event['data']['output_fields'] or None
+
+        if rule and rule == "Connection to vistatech.it" and output_fields:
+            if output_fields['k8s.ns.name'] and output_fields['k8s.pod.name']:
+                pod = output_fields['k8s.pod.name']
+                namespace = output_fields['k8s.ns.name']
+                print (f"Isolating pod \"{pod}\" in namespace \"{namespace}\"")
+                body = client.V1NetworkPolicy(
+                  api_version="networking.k8s.io/v1",
+                  kind="NetworkPolicy",
+                  metadata=client.V1ObjectMeta(name="default-deny-egress"),
+                  spec=client.V1NetworkPolicySpec(
+                      pod_selector=client.V1LabelSelector(
+                        match_labels= {"app":"nginx"}),
+                      policy_types=["Egress"]))
+                client.NetworkingV1Api().create_namespaced_network_policy(namespace=namespace, body=body)
+  handler: isolate-pod.isolate_pod
+  runtime: python3.7
+  deployment:
+    spec:
+      template:
+        spec:
+          serviceAccountName: falco-pod-isolation

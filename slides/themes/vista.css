@@ -1,0 +1,38 @@
+/* @theme vista */
+
+@import 'gaia';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    color: #160D3F;
+    font-weight: 300;
+    font-size: 0.94em;
+}
+
+section {
+    padding-top: 0;
+}
+
+section p {
+    text-align: center;
+    vertical-align: middle;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding-bottom: 30px;
+}
+
+section.lead p {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 44px;
+}
+
+strong {
+    font-weight: 600;
+}

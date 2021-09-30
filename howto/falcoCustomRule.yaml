@@ -1,0 +1,11 @@
+customRules:
+  falco_custom_network_rule.yaml: |-
+    - list: website_ips
+      items: ['"213.215.222.58"', '"213.215.222.59"']
+    
+    - rule: Connection to vistatech.it
+      desc: Detect attempts to connect to Vista Technology website  
+      condition: outbound and fd.sip in (website_ips)
+      output: Outbound connection to Vista Technology website https://www.vistatech.it (command=%proc.cmdline connection=%fd.name container_id=%container.id container_name=%container.name %container.info image=%container.image)
+      priority: WARNING
+      tags: [network]

@@ -1,0 +1,6 @@
+extraScrapeConfigs: |
+   - job_name: 'falco'
+     metrics_path: /metrics
+     static_configs:
+       - targets:
+         - falcosidekick.falco:2801
