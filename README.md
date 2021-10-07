@@ -2,7 +2,7 @@
 
 ![](./images/slide-front.png)
 
-This repository contains slides and demo code presented during the [ContainerDay 2021](https://2021.containerday.it/) event hosted by [Grusp](https://www.grusp.org/): https://2021.containerday.it/talks_speakers/#andrea-v (sorry foreign fellows... it's and italian talk)
+This repository contains slides and demo code presented during the [ContainerDay 2021](https://2021.containerday.it/) event hosted by [Grusp](https://www.grusp.org/): https://2021.containerday.it/talks_speakers/#andrea-v (sorry foreign fellows... it's an italian talk)
 
 # Slides content
 You can find an english translation of the slides [here](./slides/)
