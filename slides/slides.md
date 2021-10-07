@@ -132,7 +132,7 @@ I'm Andrea Vivaldi
 ---
 
 # eBPF (... JUST A HINT ...)
-- *Extended Berkley Paket Filter*
+- *Extended Berkeley Paket Filter*
 - **Kernel** technology that allows programs to run as if they were inside a **sandbox**, where they can benefit from specific kernel **capabilities** without adding modules or touching the source code
 - EBPF programs are **event-driven** and run when the kernel or application passes through a certain **hook**
 
