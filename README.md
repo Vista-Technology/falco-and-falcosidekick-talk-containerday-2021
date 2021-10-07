@@ -20,7 +20,7 @@ Let's take a practical example and consider the following use case:
     - Goals
         - Test the Falco Rules and intercept any violations
         - Integration for long-term monitoring (Loki, Prometheus, Grafana)
-		- Integration with external alerting system (a Slack chhannel for example)
+		- Integration with external alerting system (a Slack channel for example)
         - Implement automated remediation for the second violations
 			- We simulate to apply a Kubernetes Network Policy to isolate and deny the outgoing traffic of the POD when we receive a network connection to vistatech.it website IPs
 
@@ -68,7 +68,7 @@ We can put the YAML definition code inside a file and pass this file when instal
 
 ### The Serverless function
 
-As we said before, we want to react to an event of outbound network traffic towards some specifi IPs. A possibile remediation would be to produce, in an automated way, a Kubernetes Netork Policy to patch a poissibile security breach.
+As we said before, we want to react to an event of outbound network traffic towards some specifi IPs. A possibile remediation would be to produce, in an automated way, a Kubernetes Network Policy to patch a possibile security breach.
 
 This network policy will be resposible to deny all egress traffic from the POD.
 
@@ -151,7 +151,7 @@ We can also see that some alerts came to our Slack
 
 ![](./images/slack.png)
 
-The last thing that we have to check is the remediatin function.
+The last thing that we have to check is the remediation function.
 If all went good we expect to see a brand new NetworkPolicy, to disallow egress traffic, associated to our POD
 
 ```shell
