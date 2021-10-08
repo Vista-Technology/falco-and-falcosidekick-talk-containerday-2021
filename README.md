@@ -68,9 +68,9 @@ We can put the YAML definition code inside a file and pass this file when instal
 
 ### The Serverless function
 
-As we said before, we want to react to an event of outbound network traffic towards some specifi IPs. A possibile remediation would be to produce, in an automated way, a Kubernetes Network Policy to patch a possibile security breach.
+As we said before, we want to react to an event of outbound network traffic towards some specific IPs. A possibile remediation would be to produce, in an automated way, a Kubernetes Network Policy to patch a possibile security breach.
 
-This network policy will be resposible to deny all egress traffic from the POD.
+This network policy will be responsible to deny all egress traffic from the POD.
 
 Here a YAML example of the Network Policy definition
 
